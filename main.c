@@ -46,8 +46,18 @@ int main(void)
     printf(" or ");
     display_backwards(name);
 
+    // initialise the letter_frequency struct
+    //
+    printf("\ninitialise letter frequencies\n");
+    for (i = 0; i < strlen(alphabet); i++) {
+      letter_tab->letter=alphabet[i];
+      letter_tab->count=0;
+      printf("%c", alphabet[i]);
+      printf(" -> %c, ",letter_tab);
+    }
+    
   // display the text
-  // 
+  // and count the letters
   printf("\nThe cypher challenge text is :\n");
   for (i = 0; i < strlen(cyphertext); i++){
     if (i%30 == 0) printf("\n");
