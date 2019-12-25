@@ -1,6 +1,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h> 
+
 
 char cyphertext[]="WKH HDVLHVW PHWKRG RI HQFLSKHULQJ D WHAW PHVVDJH LV WR UHSODFH HDFK FKDUDFWHU EB DQRWKHU XVLQJ D ILAHG UXOH, VR IRU HADPSOH HYHUB OHWWHU D PDB EH UHSODFHG EB G, DQG HYHUB OHWWHU E EB WKH OHWWHU H DQG VR RQ.";
 char alphabet[]="abcdefghijklmnopqrstuvwxyz";
@@ -26,6 +28,9 @@ helpful functions such as:
 removing spaces
 print backwards
 */
+int removing_spaces(char []);
+int display_backwards(char []);
+
 int main(void) 
 {
     int i;
@@ -39,7 +44,7 @@ int main(void)
     printf(" or ");
     display_backwards(name);
 
-    // initialise the letter_frequency struct
+    // initialise the letter frequencies
     //
     printf("\ninitialise letter frequencies\n");
     for (i = 0; i < strlen(alphabet); i++) {
@@ -51,8 +56,14 @@ int main(void)
   printf("\nThe cypher challenge text is :\n");
   for (i = 0; i < strlen(cyphertext); i++){
     if (i%30 == 0) printf("\n");
-    printf("%c", cyphertext[i]);
-    frequency[cyphertext[i]]++;
+    printf("%c", tolower(cyphertext[i]));
+
+      char *pos = strchr (alphabet, tolower(cyphertext[ i ]));
+      int shift = pos ? pos - alphabet : -1;
+      
+      //printf(" -> %d, ", shift);
+      frequency[shift]++;
+
   }
 
     printf("\n\n");
