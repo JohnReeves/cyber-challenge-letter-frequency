@@ -4,6 +4,7 @@
 
 char cyphertext[]="WKH HDVLHVW PHWKRG RI HQFLSKHULQJ D WHAW PHVVDJH LV WR UHSODFH HDFK FKDUDFWHU EB DQRWKHU XVLQJ D ILAHG UXOH, VR IRU HADPSOH HYHUB OHWWHU D PDB EH UHSODFHG EB G, DQG HYHUB OHWWHU E EB WKH OHWWHU H DQG VR RQ.";
 char alphabet[]="abcdefghijklmnopqrstuvwxyz";
+int frequency[26];
 
 // affine letter shift = (a*x + b) % 26
 // thus the caesar letter shift = (1*x + a) % 26
@@ -14,14 +15,6 @@ int b = 3;
 
 // vigenere cipher key
 char keyword[]="babacabab";
-
-// letter frequency table
-// initialise to zero in main
-struct letter_frequency {
-  char * letter;
-  int count;
-} letter_tab[26];
-
 
 /*
 encription for:
@@ -50,10 +43,7 @@ int main(void)
     //
     printf("\ninitialise letter frequencies\n");
     for (i = 0; i < strlen(alphabet); i++) {
-      letter_tab->letter=alphabet[i];
-      letter_tab->count=0;
-      printf("%c", alphabet[i]);
-      printf(" -> %c, ",letter_tab);
+      frequency[i]=0;
     }
     
   // display the text
@@ -62,6 +52,7 @@ int main(void)
   for (i = 0; i < strlen(cyphertext); i++){
     if (i%30 == 0) printf("\n");
     printf("%c", cyphertext[i]);
+    frequency[cyphertext[i]]++;
   }
 
     printf("\n\n");
@@ -87,6 +78,15 @@ int main(void)
 
       // display the letter we don't know yet
       printf("%c", cyphertext[i]);
+    }
+    printf("\n");
+
+    // caesar shift (phrase & shift as parameters)
+    // using sprintf when written as a function
+    printf("\nAlphabet letter frequencies\n");
+    for (i = 0; i < strlen(alphabet); i++) {
+      printf("%c", alphabet[i]);
+      printf(" -> %d, ",frequency[i]);
     }
     printf("\n");
 
