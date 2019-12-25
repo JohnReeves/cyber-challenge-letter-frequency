@@ -16,6 +16,7 @@ int b = 3;
 char keyword[]="babacabab";
 
 // letter frequency table
+// initialise to zero in main
 struct letter_frequency {
   char * letter;
   int count;
